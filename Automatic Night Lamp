@@ -1,0 +1,42 @@
+char data=0;
+int sensorpin=A0;
+int ledpin=3;
+int sensorvalue=0;
+void setup()
+{
+ Serial.begin(9600);
+pinMode(3,OUTPUT);
+}
+void loop() 
+{
+  if(Serial.available()>0)
+{
+  data=Serial.read();
+  Serial.println(data);
+  if(data=='0')
+  {
+    abc:
+    while(Serial.read()!='1')
+    {Serial.print(data);
+  digitalWrite(3,LOW);
+    }
+  goto bcd;
+  }
+  else
+  {
+   while(Serial.read()!='0')
+   {
+    bcd:                                  
+  sensorvalue=analogRead(sensorpin);
+  Serial.println(data);
+  Serial.println(sensorvalue);
+  delay(100);
+  if(sensorvalue>50)
+digitalWrite(ledpin,LOW);
+else
+digitalWrite(ledpin,HIGH);
+   }
+   goto abc;
+}
+}
+}
